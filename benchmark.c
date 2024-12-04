@@ -216,13 +216,19 @@ static void stop(const char* name) {
 }
 
 void benchmark_init() {
+  unsigned int s = (unsigned int)&rand_;
+
   db_ = NULL;
   db_num_ = 0;
   num_ = FLAGS_num;
   reads_ = FLAGS_reads < 0 ? FLAGS_num : FLAGS_reads;
   bytes_ = 0;
-  rand_gen_init(&gen_, FLAGS_compression_ratio);
-  rand_init(&rand_, 301);;
+
+  srand(time(NULL));
+  s = rand();
+
+  rand_gen_init(&gen_, FLAGS_compression_ratio, s);
+  rand_init(&rand_, s);
 
   struct dirent* ep;
   DIR* test_dir = opendir(FLAGS_db);

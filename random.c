@@ -66,7 +66,7 @@ uint32_t rand_next(Random* rand_) {
 
 uint32_t rand_uniform(Random* rand_, int n) { return rand_next(rand_) % n; }
 
-void rand_gen_init(RandomGenerator* gen_, double compression_ratio) {
+void rand_gen_init(RandomGenerator* gen_, double compression_ratio, uint32_t s) {
   Random rnd;
   char* piece;
   
@@ -75,7 +75,7 @@ void rand_gen_init(RandomGenerator* gen_, double compression_ratio) {
   gen_->pos_ = 0;
   (gen_->data_)[0] = '\0';
 
-  rand_init(&rnd, 301);
+  rand_init(&rnd, s);
   while (gen_->data_size_ < 1048576) {
     piece = compressible_string(&rnd, compression_ratio, 100);
     strcat(gen_->data_, piece);

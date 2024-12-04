@@ -128,7 +128,7 @@ void raw_print(FILE *, Raw *);
 void rand_init(Random*, uint32_t);
 uint32_t rand_next(Random*);
 uint32_t rand_uniform(Random*, int);
-void rand_gen_init(RandomGenerator*, double);
+void rand_gen_init(RandomGenerator*, double, unsigned int);
 char* rand_gen_generate(RandomGenerator*, int);
 
 /* util.c */
